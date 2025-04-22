@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>My Scratch Page</title>
+    
+        <!-- Only keep the correct path -->
+        <link rel="stylesheet" href="css/scratch.css">
+    </head>    
+<body>
+    <div class="content">
+
+        <h1 id="top">The Porsche Carerra GT</h1>
+        <p>This page is all about one of my dream cars, the Porsche Carerra GT!</p>
+
+        <!-- Nav to other pages -->
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="webapp.html">Tic-Tac-Toe Web App</a>
+        </nav>
+
+        <!-- List Section -->
+        <!-- List Section -->
+<h2>Specs</h2>
+<ol>
+    <li>
+        <span class="list-header">Engine:</span>
+        <ul class="engine-specs">
+            <li>5.7L</li>
+            <li>Naturally Aspirated V10</li>
+            <li>603 hp</li>
+        </ul>
+    </li>
+    <li>6-Speed Manual Transmission</li>
+    <li>Only 1,270 Units Produced</li>
+</ol>
+
+
+
+        <!-- Image -->
+        <div class="img-block">
+            <img src="assets/img/2023_01_2005-porsche-carrera-gt1316472_.jpg" alt="Porsche Carrera GT" width="500">
+        </div>
+
+        <!-- Embedded YouTube Video -->
+        <h2>Cinematic Showcase | Greenfield Visuals</h2>
+        <div class="video-container">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/DamNYXh776g?si=a9eyPcyn8UwSI70X"
+                title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+        </div>
+        <!-- Styled Divs -->
+        <div class="highlight-box">
+            <h3>Fun Fact</h3>
+            <p>The Carrera GT was the first production car to feature a full carbon fibre reinforced plastic (CFRP) monocoque chassis. Carbon fibre is a strong and lightweight material commonly used in high-performance vehicles. The chassis of the Carrera GT weighs 100 kg, contributing to the car’s overall weight and handling characteristics.</p>
+        </div>
+
+        <div class="highlight-box alt">
+            <h2>Nürburgring Lap Times Dashboard</h2>
+        </div>
+
+        <!-- Tableau Viz Embed: Responsive -->
+        <div class="tableau-container" id="tableau">
+            <div class='tableauPlaceholder' id='viz1745272323578' style='position: relative'>
+                <noscript>
+                    <a href='#'>
+                        <img alt=' '
+                            src='https://public.tableau.com/static/images/Nu/NurburgringLapTimes_16866739923940/Dashboard1/1_rss.png'
+                            style='border: none' />
+                    </a>
+                </noscript>
+                <object class='tableauViz'>
+                    <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+                    <param name='embed_code_version' value='3' />
+                    <param name='site_root' value='' />
+                    <param name='name' value='NurburgringLapTimes_16866739923940/Dashboard1' />
+                    <param name='tabs' value='yes' />
+                    <param name='toolbar' value='yes' />
+                    <param name='static_image'
+                        value='https://public.tableau.com/static/images/Nu/NurburgringLapTimes_16866739923940/Dashboard1/1.png' />
+                    <param name='animate_transition' value='yes' />
+                    <param name='display_static_image' value='yes' />
+                    <param name='display_spinner' value='yes' />
+                    <param name='display_overlay' value='yes' />
+                    <param name='display_count' value='yes' />
+                    <param name='language' value='en-US' />
+                </object>
+            </div>
+        </div>
+
+        <!-- Back to top anchor -->
+        <p><a href="#top">Back to Top ↑</a></p>
+
+    </div> <!-- End of content wrapper -->
+
+    <!-- Tableau Script -->
+    <script type='text/javascript'>
+        var divElement = document.getElementById('viz1745272323578');
+        var vizElement = divElement.getElementsByTagName('object')[0];
+        vizElement.style.width = '100%';
+        vizElement.style.height = '700px';
+
+        var scriptElement = document.createElement('script');
+        scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+        vizElement.parentNode.insertBefore(scriptElement, vizElement);
+    </script>
+</body>
+
+</html>

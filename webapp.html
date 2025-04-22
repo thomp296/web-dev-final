@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tic Tac Toe vs AI</title>
+  <style>
+    .navbar {
+  background-color: rgba(0, 0, 0, 0.4);
+  padding: 15px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.navbar a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.navbar a:hover {
+  color: #ffcc00;
+}
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    h1 {
+      margin-top: 20px;
+      font-size: 2.5rem;
+      text-shadow: 1px 1px 3px #000;
+    }
+
+    .board {
+      display: grid;
+      grid-template-columns: repeat(3, 100px);
+      grid-template-rows: repeat(3, 100px);
+      gap: 10px;
+      margin-top: 30px;
+    }
+
+    .cell {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 15px;
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #333;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    .cell:hover {
+      background-color: #d6e4f0;
+      transform: scale(1.05);
+    }
+
+    .cell.winner {
+      background-color: #4caf50;
+      color: white;
+      box-shadow: 0 0 15px #4caf50;
+    }
+
+    .status {
+      margin-top: 25px;
+      font-size: 1.2rem;
+      background-color: rgba(0, 0, 0, 0.2);
+      padding: 10px 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 25px;
+      font-size: 1rem;
+      background-color: #ff9800;
+      border: none;
+      border-radius: 8px;
+      color: #fff;
+      cursor: pointer;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #e68900;
+    }
+  </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index.html">Home</a>
+        <a href="scratch.html">Scratch Page</a>
+      </nav>      
+  <h1>Impossible Tic-Tac-Toe</h1>
+  <div class="board" id="board"></div>
+  <div class="status" id="status">Your turn (X)</div>
+  <button onclick="resetGame()">Restart Game</button>
+
+  <script>
+    const boardEl = document.getElementById('board');
+    const statusEl = document.getElementById('status');
+    let board = Array(9).fill('');
+    let gameActive = true;
+    let winningCells = [];
+
+    function createBoard() {
+      boardEl.innerHTML = '';
+      board.forEach((cell, index) => {
+        const cellEl = document.createElement('div');
+        cellEl.classList.add('cell');
+        if (winningCells.includes(index)) {
+          cellEl.classList.add('winner');
+        }
+        cellEl.dataset.index = index;
+        cellEl.textContent = cell;
+        if (cell === '' && gameActive) {
+          cellEl.addEventListener('click', handlePlayerMove);
+        }
+        boardEl.appendChild(cellEl);
+      });
+    }
+
+    function handlePlayerMove(e) {
+      const index = e.target.dataset.index;
+      if (board[index] !== '' || !gameActive) return;
+
+      board[index] = 'X';
+      updateGame();
+
+      if (gameActive) {
+        statusEl.textContent = "AI's turn (O)";
+        setTimeout(() => {
+          const bestMove = findBestMove(board);
+          board[bestMove] = 'O';
+          updateGame();
+        }, 400);
+      }
+    }
+
+    function updateGame() {
+      const result = checkWinner();
+      createBoard();
+
+      if (result.winner) {
+        statusEl.textContent = `Player ${result.winner} wins!`;
+        gameActive = false;
+        winningCells = result.pattern;
+        createBoard();
+      } else if (board.every(cell => cell !== '')) {
+        statusEl.textContent = "It's a draw!";
+        gameActive = false;
+      } else {
+        statusEl.textContent = "Your turn (X)";
+      }
+    }
+
+    function checkWinner() {
+      const winPatterns = [
+        [0,1,2], [3,4,5], [6,7,8],
+        [0,3,6], [1,4,7], [2,5,8],
+        [0,4,8], [2,4,6]
+      ];
+
+      for (let pattern of winPatterns) {
+        const [a, b, c] = pattern;
+        if (board[a] && board[a] === board[b] && board[b] === board[c]) {
+          return { winner: board[a], pattern };
+        }
+      }
+      return { winner: null, pattern: [] };
+    }
+
+    function resetGame() {
+      board = Array(9).fill('');
+      gameActive = true;
+      winningCells = [];
+      statusEl.textContent = "Your turn (X)";
+      createBoard();
+    }
+
+    function findBestMove(newBoard) {
+      let bestScore = -Infinity;
+      let move;
+
+      for (let i = 0; i < 9; i++) {
+        if (newBoard[i] === '') {
+          newBoard[i] = 'O';
+          let score = minimax(newBoard, 0, false);
+          newBoard[i] = '';
+          if (score > bestScore) {
+            bestScore = score;
+            move = i;
+          }
+        }
+      }
+
+      return move;
+    }
+
+    function minimax(testBoard, depth, isMaximizing) {
+      const result = checkWinnerMini(testBoard);
+      if (result !== null) {
+        const scores = { X: -10, O: 10, draw: 0 };
+        return scores[result];
+      }
+
+      if (isMaximizing) {
+        let bestScore = -Infinity;
+        for (let i = 0; i < 9; i++) {
+          if (testBoard[i] === '') {
+            testBoard[i] = 'O';
+            let score = minimax(testBoard, depth + 1, false);
+            testBoard[i] = '';
+            bestScore = Math.max(score, bestScore);
+          }
+        }
+        return bestScore;
+      } else {
+        let bestScore = Infinity;
+        for (let i = 0; i < 9; i++) {
+          if (testBoard[i] === '') {
+            testBoard[i] = 'X';
+            let score = minimax(testBoard, depth + 1, true);
+            testBoard[i] = '';
+            bestScore = Math.min(score, bestScore);
+          }
+        }
+        return bestScore;
+      }
+    }
+
+    function checkWinnerMini(testBoard) {
+      const winPatterns = [
+        [0,1,2], [3,4,5], [6,7,8],
+        [0,3,6], [1,4,7], [2,5,8],
+        [0,4,8], [2,4,6]
+      ];
+
+      for (let pattern of winPatterns) {
+        const [a, b, c] = pattern;
+        if (testBoard[a] && testBoard[a] === testBoard[b] && testBoard[b] === testBoard[c]) {
+          return testBoard[a];
+        }
+      }
+
+      if (testBoard.every(cell => cell !== '')) return 'draw';
+      return null;
+    }
+
+    createBoard();
+  </script>
+</body>
+</html>

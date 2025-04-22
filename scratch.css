@@ -1,0 +1,248 @@
+/* Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500&display=swap');
+
+/* General Body Styles */
+body {
+    font-family: 'Orbitron', sans-serif;
+    background: linear-gradient(to bottom, #838383, #34495e);
+    color: #ecf0f1;
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.3s;
+}
+
+/* Content Wrapper */
+.content {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #34495e;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
+    text-align: center;
+    overflow: hidden;
+}
+
+/* Headers */
+h1, h2, h3 {
+    color: #f39c12;
+    text-shadow: 1px 1px 3px black;
+    font-weight: 500;
+}
+
+/* Navigation */
+nav {
+    margin-bottom: 20px;
+}
+
+nav a {
+    display: inline-block;
+    margin: 0 10px;
+    padding: 8px 14px;
+    text-decoration: none;
+    color: #ecf0f1;
+    background-color: #2980b9;
+    border-radius: 6px;
+    transition: background-color 0.3s;
+}
+
+nav a:hover {
+    background-color: #f39c12;
+    color: #2c3e50;
+}
+
+/* Ordered List */
+ol {
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 0;
+    max-width: 600px;
+    font-size: 1.1rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-left: 6px solid #16a085;
+    padding: 15px 25px;
+    border-radius: 10px;
+    list-style-position: outside;
+    text-align: left;
+}
+
+ol > li {
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+/* Style for the "Engine:" label */
+.list-header {
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Fix indentation and centering for sublist */
+.engine-specs {
+    list-style-type: disc;
+    padding-left: 0;
+    margin-left: 0;
+    text-align: left;
+}
+
+.engine-specs li {
+    margin: 5px 0;
+    color: #f39c12;
+}
+
+/* Image Block */
+.img-block img {
+    border: 5px solid #f39c12;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(243, 156, 18, 0.4);
+    max-width: 100%;
+    height: auto;
+    transition: transform 0.3s ease;
+}
+
+.img-block img:hover {
+    transform: scale(1.05);
+}
+
+/* Video Container */
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    padding-top: 25px;
+    height: 0;
+    margin: 30px 0;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    border: none;
+    box-shadow: 0 0 15px rgba(243, 156, 18, 0.3);
+}
+
+/* Highlighted Boxes */
+.highlight-box,
+.highlight-box.alt {
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+    max-width: 700px;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.highlight-box {
+    background-color: #34495e;
+    border-left: 6px solid #16a085;
+}
+
+.highlight-box:hover {
+    background-color: #1abc9c;
+    box-shadow: 0 0 15px rgba(26, 188, 156, 0.6);
+}
+
+.highlight-box.alt {
+    background-color: #2c3e50;
+    border-left: 6px solid #f39c12;
+}
+
+.highlight-box.alt:hover {
+    background-color: #f39c12;
+    box-shadow: 0 0 15px rgba(243, 156, 18, 0.6);
+}
+
+/* Tableau Container */
+.tableau-container {
+    margin: 40px auto;
+    max-width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 15px rgba(243, 156, 18, 0.4);
+}
+
+/* Back-to-top Links */
+a {
+    color: #f39c12;
+}
+
+a:hover {
+    color: #fff;
+    text-decoration: underline;
+}
+
+/* Dark Mode Toggle Switch */
+.switch {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.switch input {
+    display: none;
+}
+
+.switch label {
+    width: 60px;
+    height: 30px;
+    background-color: #2980b9;
+    border-radius: 30px;
+    position: relative;
+    cursor: pointer;
+}
+
+.switch label::before {
+    content: '';
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: 22px;
+    height: 22px;
+    background-color: #fff;
+    border-radius: 50%;
+    transition: 0.3s;
+}
+
+.switch input:checked + label {
+    background-color: #f39c12;
+}
+
+.switch input:checked + label::before {
+    transform: translateX(30px);
+}
+
+/* Dark Mode Styles */
+body.dark-mode {
+    background: #2c3e50;
+    color: #ecf0f1;
+}
+
+body.dark-mode .highlight-box,
+body.dark-mode .highlight-box.alt {
+    background-color: #34495e;
+    border-left-color: #f39c12;
+}
+
+body.dark-mode nav a {
+    background-color: #34495e;
+    color: #f39c12;
+}
+
+body.dark-mode nav a:hover {
+    background-color: #f39c12;
+    color: #2c3e50;
+}
+
+/* Smooth Transitions for Dark Mode */
+body,
+nav a,
+.highlight-box,
+.video-container iframe,
+.tableau-container {
+    transition: all 0.3s ease-in-out;
+}
